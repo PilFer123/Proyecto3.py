@@ -6,11 +6,9 @@ import os
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-
 from mis_clases import *
 
 '''
-
 def datosServicios():
     #inicializar datos servicios
     servicio1.cedula_usu = "27373737"
@@ -21,16 +19,48 @@ def limpiar_pant():
     for a in range(30):
         print(" ")
 
+def mostrarPublic():
+    print("            Mostrar Publicaciones        ")
+    print("Libros Registrados")
+    for j in range(len(arrLib)):
+        print(arrLib[j].autor, " ", arrLib[j].titulo)
+    print()
+    print("Revistas Registradas")
+    for i in range(len(arrRev)):
+        print(arrRev[i].autor, " ", arrRev[i].titulo)
+    print()
+
+def nuevoLibro():
+    print("            Registrar NUEVOS Libros               ")
+    z = int(input("Cúantos libros desea registrar: "))
+    for i in range(z):
+        print("Ingresando libro ", i + 1)
+        x = str("obj") + str(i)
+        x = Libro()  # Instanciar Libros clase heredada de clase Publicaciones
+        x.setDatos()
+        arrLib.append(x)
+    print()
+
+def nuevoRevista():
+    print("            Registrar NUEVAS Revistas             ")
+    z = int(input("Cúantas Revistas desea registrar: "))
+    for i in range(z):
+        print("Ingresando Revista ", i + 1)
+        y = str("obj") + str(i)
+        y = Revista()  # Instanciar Revista clase heredada de clase Publicaciones
+        y.setDatos()
+        arrRev.append(y)
+    print()
+
+
 # MAIN
 if __name__ == "__main__":
     s = Servicio()
     u = Usuario()
 
-
-    l = Libro()         # Instanciar Libros clase heredada de clase Publicaciones
-    r = Revista()       # Instanciar Revista, clase heredada de clase Publicaciones
-    arrObjs = []        # vector de objetos para almacenar libros y revistas
+    arrLib = []
     arrRev = []
+    arrIng = []
 
     opc = 1
     while opc != 0:
@@ -41,7 +71,7 @@ if __name__ == "__main__":
         print("¨¨¨UNIVERSIDAD ESTATAL A DISTANCIA¨¨¨¨¨¨¨¨¨")
         print("¨¨¨Carrera de Informática Educativa¨¨¨¨¨¨¨¨")
         print("¨¨¨¨¨¨¨¨Curso: Programación III¨¨¨¨¨¨¨¨¨¨¨¨")
-        print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨Proyecto #1 ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
+        print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨Proyecto #2 ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
         print("                                           ")
         print("             MENU PRINCIPAL                ")
         print("                                           ")
@@ -51,11 +81,11 @@ if __name__ == "__main__":
         print("    OPC 3: Mostrar Publicaciones           ")
         print("                                           ")
         print("                                           ")
-        print("    OPC 5: Mostrar servicio                ")
-        print("    OPC 6: NUEVOS servicios                ")
+        print("    OPC 5: Registrar Servicio              ")
+        print("    OPC 6: Mostra Servicios                ")
         print("                                           ")
-        print("    OPC 7: CALCULAR DEUDAS X servicios     ")
-        print("    OPC 8: Cobro por Servicios     ")
+        print("    OPC 7: CALCULAR DEUDAS X Servicios     ")
+        print("    OPC 8: Cobro por Servicios             ")
         print("                                           ")
         print("    OPC 0: Finalizar                       ")
         print("+++++++++++++++++++++++++++++++++++++++++++")
@@ -65,39 +95,14 @@ if __name__ == "__main__":
             # no digitó un número
             control = input("Error al digitar la opción, Presione ENTER para continuar ==>")
             continue
-        elif opc == "1":                  # Opc 1 = Registrar nuevos libros
-            print("            Registrar NUEVOS Libros               ")
-            z = int(input("Cúantos libros desea registrar: "))
-            for i in range(z):
-                print("Ingresando libro ",i+1)
-                x = str("obj") + str(i)
-                x = Libro()
-                x.setDatos()
-                arrObjs.append(x)
-            print()
-        elif opc == "2":                  # Opc 2 = Registrar nuevas Revistas
-            print("            Registrar NUEVAS Revistas             ")
-            z = int(input("Cúantas Revistas desea registrar: "))
-            for i in range(z):
-                print("Ingresando Revista ", i+1)
-                y = str("obj") + str(i)
-                y = Revista()
-                y.setDatos()
-                arrRev.append(y)
-            print()
+        elif opc == "1":            # Opc 1 = Registrar nuevos libros
+            nuevoLibro()
 
-        elif opc == "3":
-            # Mostrar Publicaciones registradas
-            print("            Mostrar Publicaciones        ")
-            print("Libros Registrados")
-            for j in range(len(arrObjs)):
-                print(arrObjs[j].autor, " ", arrObjs[j].titulo)
-            print()
-            print("Revistas Registradas")
-            for i in range(len(arrRev)):
-                print(arrRev[i].autor, " ", arrRev[i].titulo)
-            print()
+        elif opc == "2":            # Opc 2 = Registrar nuevas Revistas
+            nuevoRevista()
 
+        elif opc == "3":            # Mostrar Publicaciones registradas
+            mostrarPublic()
         elif opc == "4":
             print("            Solicitar Préstamo               ")
             print()
@@ -122,13 +127,10 @@ if __name__ == "__main__":
             while (control != ("s" or "S")):
                 print("         CALCULADORA DEL SISTEMA ")
                 print()
-                # leer la operación a realizarr
+                valor1 = float(input("==> Digite el PRIMER valor ==> "))
                 oper = input("==> Digite la operación a realizar (+, -, *, /): ")
+                valor2 = float(input("==> Digite el SEGUNDO valor ==> "))
                 if oper in ["+", "-", "*", "/"]:
-                    print()
-                    # leer los valores
-                    valor1 = float(input("==> Digite el PRIMER valor ==> "))
-                    valor2 = float(input("==> Digite el SEGUNDO valor ==> "))
                     print()
                     # calcular el resultado de la operación
                     result = Calc(valor1, valor2)
