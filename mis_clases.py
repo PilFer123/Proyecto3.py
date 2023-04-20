@@ -13,7 +13,7 @@ class Publicacion:          # definición clase Publicación
         self.autor = input("Autor: ")
         self.titulo = input("Título: ")
         self.anno = input("Año: ")
-        self.editorial = input("Edit.: ")
+        self.editorial = input("Editorial: ")
 
 class Libro (Publicacion):
     pass
@@ -22,12 +22,12 @@ class Revista (Publicacion):
     def __int__(self):
         super().__int__()
         self.volumen = " "
-        self.adicion = " "
+        self.edicion = " "
 
     def setDatos(self):
         super().setDatos()
         self.volumen = input("Volumen: ")
-        self.adicion = input("AEdición: ")
+        self.edicion = input("Edición: ")
 
 '''
 class Libro():

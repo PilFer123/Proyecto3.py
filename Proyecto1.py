@@ -19,15 +19,18 @@ def limpiar_pant():
     for a in range(30):
         print(" ")
 
-def mostrarPublic():
+def mostrarPublic():        # Muestra las Publicaciones almacenadas
     print("            Mostrar Publicaciones        ")
-    print("Libros Registrados")
+    print("Libros Registrados ")
     for j in range(len(arrLib)):
-        print(arrLib[j].autor, " ", arrLib[j].titulo)
+        print(f"Autor: {arrLib[j].autor} Título: {arrLib[j].titulo} "
+              f"Editorial: {arrLib[j].editorial} Año: {arrLib[j].anno} ")
     print()
-    print("Revistas Registradas")
+    print("Revistas Registradas ")
     for i in range(len(arrRev)):
-        print(arrRev[i].autor, " ", arrRev[i].titulo)
+        print(f"Autor: {arrRev[i].autor} Título: {arrRev[i].titulo} "
+              f"Editorial: {arrRev[i].editorial} Año: {arrRev[i].anno} "
+              f"Vol.: {arrRev[i].volumen} Edición {arrRev[i].edicion}")
     print()
 
 def nuevoLibro():
@@ -39,7 +42,7 @@ def nuevoLibro():
         x = Libro()  # Instanciar Libros clase heredada de clase Publicaciones
         x.setDatos()
         arrLib.append(x)
-    print()
+        print()
 
 def nuevoRevista():
     print("            Registrar NUEVAS Revistas             ")
