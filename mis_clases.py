@@ -29,74 +29,53 @@ class Revista (Publicacion):
         self.volumen = input("Volumen: ")
         self.edicion = input("Edición: ")
 
-'''
-class Libro():
-    #  clase Libros
-    def __int__(self):
-        self.autor = ""
-        self.titulo = ""
-        self.anno = 0
-        self.estado = ""      # posibles estados: disponible, prestado, perdido, otro
-
-    def mostrarLibro(self):
-        # Retorna los datos de cada libro
-        return "Au: {}, Tit. {}, año. {}, estado {}".format(self.autor, self.titulo, self.anno, self.estado)
-
-    def nuevoLibro(s):
-        # lee por teclado la información de un NUEVO libro
-        s.autor = input("Autor: ")
-        s.titulo = input("Título: ")
-        s.anno = input("Año: ")
-        s.estado = input("Estado: ")
-        return s
-'''
 ###########################################################3
 # definición clase Usuarios
-class Usuario():
-    #  clase Usuarios
+class Usuario():                #  clase Usuarios
+
     def __int__ (self):
-        self.cedula = ""
-        self.nombre = ""
-        self.telefono = ""
-        self.categoria = ""
+        self.identif = " "
+        self.nombre = " "
+        self.telefono = " "
 
-    def mostrarUsuario(self):
-        # retorna los datos de cada usuario
-        return "Nombre: {}, tel. {}, Recor. {}".format(self.nombre,self.telefono,self.categoria)
 
-    def nuevoUsuario(s):
-        # lee por teclado los datos de un NUEVO usuario
-        s.cedula = input("Cedula: ")
-        s.nombre = input("Nombre: ")
-        s.telefono = input("Telefono: ")
-        s.categoria = input("Categoria: ")
+    def mostrarUsuario(self):       # retorna los datos del usuario
+        return "Num. Identif: {} Nombre: {}, tel. {}".format(self.identif, self.nombre,self.telefono)
+
+    def nuevoUsuario(s):            # lee datos de un NUEVO usuario
+        s.cedula = input("Num. Identificación: ")
+        s.nombre = input("Nombre de Usuario: ")
+        s.telefono = input("Telefono de Usuario: ")
         return s
-
 
 ###########################################################
-# definición clase Servicio (Prestamo/Devolución)
-class Servicio():
-    # definición clase Servicio
+# definición clase Servicios (Prestamo/Devolución)
+class Servicio():    # definición clase Servicio
     def __int__(self):
-        self.cedula_usu = ""
-        self.tipo_serv = ""
-        self.nom_lib = ""
-        self.fech_serv = ""
-        self.fech_vec = ""
+        self.idServicio = " "
+        self.descripc = ""
+        self.fechInic = ""
+        self.fechfinal = ""
+        self.idUsu = ""
+        self.nombreUsu = ""
+        self.telefUsu = ""
 
-    def mostrarServicio(self):
-        # Retorna datos de servicio solicitado
-        return "Usuario: {}, Ser.{}, libro {}, f.prest. {}, f.vec. {} ".format(self.cedula_usu,self.tipo_serv,self.nom_lib,self.fech_serv,self.fech_vec)
+    def mostrarServicio(self):      # Retorna datos de servicio
+        return "Identif de Servicio: {}, Tipo de servicio:{}, Fecha Inicio: {}, " \
+               "Fecha devolución: {}, Identif. del Usuario: {}, " \
+               "Nombre del Usuario: {}, elefono del Usuario: {}" \
+               " ".format(self.idServicio, self.descripc, self.fechInic, self.fechfinal,
+                          self.idUsu, self.nombreUsu, self.telefUsu)
 
-    def nuevoServicio(s):
-        # Leer por tecladdo nuevos servicios
-        s.cedula_usu = input("Cedula Usuario: ")
-        s.tipo_serv = input("Tipo de servicio: ")
-        s.nom_lib = input("Nombre del Libro: ")
-        s.fech_serv = input("fecha de préstamo: ")
-        s.fech_vec = input("fecha de vecimiento: ")
+    def getServicio(s):        # registrar nuevo servicio
+        s.idServicio = input("Identif de Servicio ")
+        s.descripc = input("Tipo de servicio (préstamo, devolución, pérdida, otro): ")
+        s.fechInic = input("Fecha Inicio: ")
+        s.fechfinal = input("Fecha devolución: ")
+        s.idUsu = input("Identif. del Usuario: ")
+        s.nombreUsu = input("Nombre del Usuario: ")
+        s.telefUsu = input("Telefono del Usuario")
         return s
-
 
 
 ###########################################################

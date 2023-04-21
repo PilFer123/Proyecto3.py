@@ -65,6 +65,8 @@ if __name__ == "__main__":
     arrRev = []
     arrIng = []
 
+    opcTupla = ("1","2","3","4","5","6","7","8","0")
+
     opc = 1
     while opc != 0:
         limpiar_pant()
@@ -92,11 +94,11 @@ if __name__ == "__main__":
         print("                                           ")
         print("    OPC 0: Finalizar                       ")
         print("+++++++++++++++++++++++++++++++++++++++++++")
-        opc = input("Digite una opción: 1,2,3,4,5,6,7,8 o 0 para finalizar: ")
+        opc = input("Digite una opción: 1,2,3,4,5,6,7 o 0 para finalizar: ")
+
         limpiar_pant()
         clear()
-        if not(opc in ["1","2","3","4","5","6","7","8","0"]):
-            # no digitó un número
+        if not(opc in opcTupla):    # error: no digitó un número
             control = input("Error al digitar la opción, Presione ENTER para continuar ==>")
             continue
         elif opc == "1":            # Opc 1 = Registrar nuevos libros
@@ -107,22 +109,22 @@ if __name__ == "__main__":
 
         elif opc == "3":            # Mostrar Publicaciones registradas
             mostrarPublic()
-        elif opc == "4":
-            print("            Solicitar Préstamo               ")
+
+        elif opc == "4":            # opc 4: Registrar Nuevo servicio
+            print("            Solicitar algún Servicio             ")
+            print()
+            s.getServicio()
             print()
 
-        elif opc == "5":
-            print("            Solicitar Devolución           ")
+        elif opc == "5":            # opc 5: Mostrar servicios registrados
+            print("            Mostrar servicios registrados           ")
             print()
-
-        elif opc == "6":
-            # agrega nuevos Servicios
-            print("            NUEVOS Servicios            ")
-            print()
-            s.nuevoServicio()
             print(s.mostrarServicio())
             print()
-        elif opc == "7":
+
+        elif opc == "6":            # OPC 6: CALCULAR DEUDAS por Servicios
+            print("            C A L C U L A D O R A            ")
+
             # Calculadora de multas por morocidad
             valor1 = 0
             valor2 = 0
@@ -134,6 +136,7 @@ if __name__ == "__main__":
                 valor1 = float(input("==> Digite el PRIMER valor ==> "))
                 oper = input("==> Digite la operación a realizar (+, -, *, /): ")
                 valor2 = float(input("==> Digite el SEGUNDO valor ==> "))
+
                 if oper in ["+", "-", "*", "/"]:
                     print()
                     # calcular el resultado de la operación
@@ -154,8 +157,8 @@ if __name__ == "__main__":
                 control = input("===> Digite 'S' o 's' para finalizar o ENTER para continuar: ")
                 limpiar_pant()
                 print()
-        elif opc == "8":
-            # Registrar ingresos por prestación de servicios
+
+        elif opc == "7":            # Registrar ingresos por prestación de servicios
             result = 0
             matr1 = [0,1,2,3]
             for i in range(4):
