@@ -33,7 +33,7 @@ def mostrarPublic():        # Muestra las Publicaciones almacenadas
               f"Vol.: {arrRev[i].volumen} Edición {arrRev[i].edicion}")
     print()
 
-def nuevoLibro():
+def nuevoLibro():       # Registra nuevos libros
     print("            Registrar NUEVOS Libros               ")
     z = int(input("Cúantos libros desea registrar: "))
     for i in range(z):
@@ -44,7 +44,7 @@ def nuevoLibro():
         arrLib.append(x)
         print()
 
-def nuevoRevista():
+def nuevoRevista():         # Registra nuevas revistas
     print("            Registrar NUEVAS Revistas             ")
     z = int(input("Cúantas Revistas desea registrar: "))
     for i in range(z):
@@ -84,16 +84,17 @@ if __name__ == "__main__":
         print("    OPC 3: Mostrar Publicaciones           ")
         print("                                           ")
         print("                                           ")
-        print("    OPC 5: Registrar Servicio              ")
-        print("    OPC 6: Mostra Servicios                ")
+        print("    OPC 4: Registrar Servicio              ")
+        print("    OPC 5: Mostrar Servicios               ")
         print("                                           ")
-        print("    OPC 7: CALCULAR DEUDAS X Servicios     ")
-        print("    OPC 8: Cobro por Servicios             ")
+        print("    OPC 6: CALCULAR DEUDAS X Servicios     ")
+        print("    OPC 7: Cobro por Servicios             ")
         print("                                           ")
         print("    OPC 0: Finalizar                       ")
         print("+++++++++++++++++++++++++++++++++++++++++++")
         opc = input("Digite una opción: 1,2,3,4,5,6,7,8 o 0 para finalizar: ")
         limpiar_pant()
+        clear()
         if not(opc in ["1","2","3","4","5","6","7","8","0"]):
             # no digitó un número
             control = input("Error al digitar la opción, Presione ENTER para continuar ==>")
