@@ -30,23 +30,6 @@ class Revista (Publicacion):    # CLase Revista que hereda todos los atributos d
         self.volumen = input("Volumen: ")
         self.numero = input("Número: ")
 
-###########################################################3
-# definición clase Usuarios
-class Usuario():                #  clase Usuarios
-
-    def __int__ (self):
-        self.identif = " "
-        self.nombre = " "
-        self.telefono = " "
-
-    def mostrarUsuario(self):       # retorna los datos del usuario
-        return "Num. Identif: {} Nombre: {}, tel. {}".format(self.identif, self.nombre,self.telefono)
-
-    def SetUsuario(s):            # lee datos de un NUEVO usuario
-        s.cedula = input("Num. Identificación: ")
-        s.nombre = input("Nombre de Usuario: ")
-        s.telefono = input("Telefono de Usuario: ")
-        return s
 
 ###########################################################
 # definición clase Servicios (Prestamo/Devolución)

@@ -15,10 +15,6 @@ class Singleton:            # clase singleton que solo permite el uso de un arhi
     def getNombre(self):        # Muestra el atributo nombre indicado x usuario
         print(self.nombre)
 
-'''    
-    def setValor(self, valor):
-        self.nombre = valor
-'''
 class UnicoArchivo:
     _instance = None
     file = None

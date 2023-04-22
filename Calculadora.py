@@ -1,32 +1,42 @@
 
+# Calcula lo adeudado por préstamo de libros o devoluciones atrasadas (morosidad)
 
-class Prueba:
-    def __int__(self):
-        self.nombre = "Marta"
-        self.edad = "22"
-        self.telef = "5355365"
+def Calc():
+    # Calculadora de multas por morocidad
+    valor1 = 0
+    valor2 = 0
 
+    ctrl = " "
+    while ctrl in ("s","S"):
+        print("         CALCULADORA DEL SISTEMA ")
+        print()
+        ctrl2 = True
+        while ctrl2:
+            try:
+                valor1 = float(input("==> Digite el PRIMER valor ==> "))
+                oper = input("==> Digite la operación a realizar (+, -, *, /): ")
+                valor2 = float(input("==> Digite el SEGUNDO valor ==> "))
+            except:
+                print("  Error en los datos ingresados  ")
+                continue
 
-obj1 = Prueba()
+        if oper in ["+", "-", "*", "/"]:
+            print()
+            result = Calc(valor1, valor2)   # calcular el resultado de la operación
+            if oper == "+":
+                print("El resultado de la suma es: ", result.sumar)
 
-import numpy as np
-
-mat1 = np.array ([obj1, obj1, obj1, obj1])
-obj1.nombre = "Marta"
-obj1.edad = "24"
-obj1.telef = "345334"
-
-
-arr_obj2 = [obj1,obj1,obj1,obj1]
-
-
-for i in range(3):
-    arr_obj2.append(obj1)
-    arr_obj2[i].nombre = input("Nombre: ")
-    arr_obj2[i].edad = input("Edad: ")
-    print(i)
-
-print()
-for i in range(3):
-    print(arr_obj2[i].nombre)
-
+            elif oper == "-":
+                print("El resultado de la resta es: ", result.restar)
+            elif oper == "*":
+                print("El resultado de la multiplicación es: ", result.multr)
+            elif oper == "/":
+                print("El resultado de la división es: ", result.dividr)
+            else:
+                print()
+        else:
+            print("===> Error en el operador indicado ")
+        print()
+        ctrl = input("===> Digite 'S' o 's' para finalizar o ENTER para continuar: ")
+        limpiar_pant()
+        clear()

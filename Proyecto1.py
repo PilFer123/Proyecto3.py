@@ -8,7 +8,7 @@ def clear():
 
 from mis_clases import Publicacion, Libro, Revista, Servicio, Calc
 from ClaseSingHistorico import Singleton, UnicoArchivo
-
+from Calculadora import Calc
 def limpiar_pant():
     for a in range(30):
         print(" ")
@@ -24,7 +24,7 @@ def mostrarPublic():        # Muestra las Publicaciones almacenadas
     for i in range(len(arrRev)):
         print(f"Autor: {arrRev[i].autor} Título: {arrRev[i].titulo} "
               f"Editorial: {arrRev[i].editorial} Año: {arrRev[i].anno} "
-              f"Vol.: {arrRev[i].volumen} Edición {arrRev[i].edicion}")
+              f"Vol.: {arrRev[i].volumen} Número: {arrRev[i].numero}")
     print()
 
 def nuevoLibro():       # Registra nuevos libros
@@ -33,6 +33,7 @@ def nuevoLibro():       # Registra nuevos libros
     while z >= 0:
         try:
             z = int(input("Cúantos libros desea registrar: "))
+            break
         except:
             print("Error: Debe digitar un numero entero")
             continue
@@ -51,6 +52,7 @@ def nuevoRevista():         # Registra nuevas revistas
     while ctrl >= 0:
         try:
             ctrl = int(input("Cúantas Revistas desea registrar: "))
+            break
         except:
             print("Error: Debe digitar un numero entero")
             ctrl = 0
@@ -65,12 +67,9 @@ def nuevoRevista():         # Registra nuevas revistas
     print()
 
 def NuevoServicio():
-
     instancia1 = Singleton()
     archivo = UnicoArchivo("Historial.txt")
-
     print("Se está utilizando el archivo: ", instancia1.getNombre())
-
     ctrl = True
     while ctrl == True:
         print()
@@ -85,6 +84,16 @@ def NuevoServicio():
         except:
             print("Error: No agregó información al archivo")
 
+        # almacenar costos de servicios
+        print("Registro de costos por el servicio prestado")
+        while True:
+            try:
+                dicCostos[k.idServicio]= float(input("==> Digite el costo del servicio?: "))
+                break
+            except:
+                print("  ==> Error en el valor digitado \n")
+                continue
+        print()
         if (input("\n Necesita registrar más servicios: ") in ["S","s"]): ctrl = True
         else: ctrl = False
     print()
@@ -95,7 +104,7 @@ def MostrarServicio():
         print(f"Id. Servicio: {k.idServicio} Descripción {k.descripc} ")
         print(f"Fecha Inic: {k.fechInic} Fecha Fin. {k.fechfinal} ")
         print(f"Id. Usuario: {k.idUsu} Nombre Usuario: {k.nombreUsu} Telef. Usuario: {k.telefUsu} ")
-    print()
+        print()
 
 def MostrarArchivo():
     ctrl = 0
@@ -104,17 +113,24 @@ def MostrarArchivo():
         for linea in fichero.readlines():
             print(linea, end='')
 
+def IngPorServ():
+    tot = 0
+    # Imprime los valores del diccionario
+    for x in dicCostos:
+        print(dicCostos[x])
+        tot = tot + dicCostos[x]
+    print(f"El total de ingresos es: {tot}")
+
+
 # MAIN
 if __name__ == "__main__":
-    #s = Servicio()
     k = Servicio()
-    #u = Usuario()
 
     arrLib = []
     arrRev = []
-    arrIng = []
+    #arrIng = []
     arrServ = []
-
+    dicCostos = {}
     opcTupla = ("1","2","3","4","5","6","7","8","0")
 
     opc = 1
@@ -169,6 +185,7 @@ if __name__ == "__main__":
             NuevoServicio()
             print()
 
+
         elif opc == "5":
             print("         Opc 5: Mostrar servicios registrados   ")
             MostrarServicio()
@@ -183,49 +200,15 @@ if __name__ == "__main__":
         elif opc == "7":            # OPC 7: CALCULAR DEUDAS por Servicios
             print("            C A L C U L A D O R A            ")
 
-            # Calculadora de multas por morocidad
-            valor1 = 0
-            valor2 = 0
-            # operaciones a realizar
-            ctrl = " "
-            while (ctrl != ("s" or "S")):
-                print("         CALCULADORA DEL SISTEMA ")
-                print()
-                valor1 = float(input("==> Digite el PRIMER valor ==> "))
-                oper = input("==> Digite la operación a realizar (+, -, *, /): ")
-                valor2 = float(input("==> Digite el SEGUNDO valor ==> "))
+            Calc()
 
-                if oper in ["+", "-", "*", "/"]:
-                    print()
-                    # calcular el resultado de la operación
-                    result = Calc(valor1, valor2)
-                    if oper == "+":
-                        print("El resultado de la suma es: ", result.sumar)
-                    elif oper == "-":
-                        print("El resultado de la resta es: ", result.restar)
-                    elif oper == "*":
-                        print("El resultado de la multiplicación es: ", result.multr)
-                    elif oper == "/":
-                        print("El resultado de la división es: ", result.dividr)
-                    else:
-                        print()
-                else:
-                    print("===> Error en el operador indicado ")
-                print()
-                ctrl = input("===> Digite 'S' o 's' para finalizar o ENTER para continuar: ")
-                limpiar_pant()
-                print()
+        elif opc == "8":
+            # Mostrar ingresos por prestación de servicios
+            # datos almacenados en diccionario dicCostos
+            IngPorServ()
 
-        elif opc == "8":            # Registrar ingresos por prestación de servicios
-            result = 0
-            matr1 = [0,1,2,3]
-            for i in range(4):
-                matr1[i] = float(input(f"Digite los ingresos #{i+1} $:"))
-                result += matr1[i]
-            print(matr1)
-            print(f"Total de ingresos ${result}")
         else:
             # finalizar el ciclo
             break
-        control = input("Presione ENTER para continuar ==> ")
+        control = input("\n Presione ENTER para continuar ==> ")
     print(" Fin del ciclo ")
