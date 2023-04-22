@@ -6,15 +6,9 @@ import os
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-from mis_clases import *
+from mis_clases import Publicacion, Libro, Revista, Servicio, Calc
+from ClaseSingHistorico import Singleton, UnicoArchivo
 
-'''
-def datosServicios():
-    #inicializar datos servicios
-    servicio1.cedula_usu = "27373737"
-    servicio1.tipo_serv = "Prestamo"
-    servicio1.nom_lib = "Hola"
-'''
 def limpiar_pant():
     for a in range(30):
         print(" ")
@@ -35,7 +29,14 @@ def mostrarPublic():        # Muestra las Publicaciones almacenadas
 
 def nuevoLibro():       # Registra nuevos libros
     print("            Registrar NUEVOS Libros               ")
-    z = int(input("Cúantos libros desea registrar: "))
+    z = 0
+    while z >= 0:
+        try:
+            z = int(input("Cúantos libros desea registrar: "))
+        except:
+            print("Error: Debe digitar un numero entero")
+            continue
+
     for i in range(z):
         print("Ingresando libro ", i + 1)
         x = str("obj") + str(i)
@@ -46,8 +47,16 @@ def nuevoLibro():       # Registra nuevos libros
 
 def nuevoRevista():         # Registra nuevas revistas
     print("            Registrar NUEVAS Revistas             ")
-    z = int(input("Cúantas Revistas desea registrar: "))
-    for i in range(z):
+    ctrl = 0
+    while ctrl >= 0:
+        try:
+            ctrl = int(input("Cúantas Revistas desea registrar: "))
+        except:
+            print("Error: Debe digitar un numero entero")
+            ctrl = 0
+            continue
+
+    for i in range(ctrl):
         print("Ingresando Revista ", i + 1)
         y = str("obj") + str(i)
         y = Revista()  # Instanciar Revista clase heredada de clase Publicaciones
@@ -55,15 +64,56 @@ def nuevoRevista():         # Registra nuevas revistas
         arrRev.append(y)
     print()
 
+def NuevoServicio():
+
+    instancia1 = Singleton()
+    archivo = UnicoArchivo("Historial.txt")
+
+    print("Se está utilizando el archivo: ", instancia1.getNombre())
+
+    ctrl = True
+    while ctrl == True:
+        print()
+        print("Ingresando datos de Nuevo Servicio ")
+        print()
+        k.SetServicio()
+        arrServ.append(k)
+        linea = k.idServicio+" "+k.descripc+" "+k.fechInic+" "+k.fechfinal+" "+\
+            k.idUsu+" "+k.nombreUsu+" "+k.telefUsu
+        try:
+            archivo.agregarLinea(linea)     # Agrega una línea de datos al archivo
+        except:
+            print("Error: No agregó información al archivo")
+
+        if (input("\n Necesita registrar más servicios: ") in ["S","s"]): ctrl = True
+        else: ctrl = False
+    print()
+
+def MostrarServicio():
+    for j in range(len(arrServ)):
+        k = arrServ[j]
+        print(f"Id. Servicio: {k.idServicio} Descripción {k.descripc} ")
+        print(f"Fecha Inic: {k.fechInic} Fecha Fin. {k.fechfinal} ")
+        print(f"Id. Usuario: {k.idUsu} Nombre Usuario: {k.nombreUsu} Telef. Usuario: {k.telefUsu} ")
+    print()
+
+def MostrarArchivo():
+    ctrl = 0
+    print(" Se mostrarán los registros ")
+    with open('Historial.txt', 'r') as fichero:
+        for linea in fichero.readlines():
+            print(linea, end='')
 
 # MAIN
 if __name__ == "__main__":
-    s = Servicio()
-    u = Usuario()
+    #s = Servicio()
+    k = Servicio()
+    #u = Usuario()
 
     arrLib = []
     arrRev = []
     arrIng = []
+    arrServ = []
 
     opcTupla = ("1","2","3","4","5","6","7","8","0")
 
@@ -72,6 +122,7 @@ if __name__ == "__main__":
         limpiar_pant()
         clear()
         # mostrar MENU PRINCIPAL
+
         print("+++++++++++++++++++++++++++++++++++++++++++")
         print("¨¨¨UNIVERSIDAD ESTATAL A DISTANCIA¨¨¨¨¨¨¨¨¨")
         print("¨¨¨Carrera de Informática Educativa¨¨¨¨¨¨¨¨")
@@ -85,52 +136,59 @@ if __name__ == "__main__":
         print("                                           ")
         print("    OPC 3: Mostrar Publicaciones           ")
         print("                                           ")
-        print("                                           ")
         print("    OPC 4: Registrar Servicio              ")
-        print("    OPC 5: Mostrar Servicios               ")
+        print("    OPC 5: Mostrar Servicios Registrados   ")
+        print("    OPC 6: Mostrar Fichero                 ")
         print("                                           ")
-        print("    OPC 6: CALCULAR DEUDAS X Servicios     ")
-        print("    OPC 7: Cobro por Servicios             ")
+        print("    OPC 7: CALCULAR DEUDAS X Servicios     ")
+        print("    OPC 8: Cobro por Servicios             ")
         print("                                           ")
         print("    OPC 0: Finalizar                       ")
         print("+++++++++++++++++++++++++++++++++++++++++++")
-        opc = input("Digite una opción: 1,2,3,4,5,6,7 o 0 para finalizar: ")
+        opc = input("Digite una opción: 1,2,3,4,5,6,7,8 o 0 para finalizar: ")
 
         limpiar_pant()
         clear()
         if not(opc in opcTupla):    # error: no digitó un número
             control = input("Error al digitar la opción, Presione ENTER para continuar ==>")
             continue
-        elif opc == "1":            # Opc 1 = Registrar nuevos libros
+        elif opc == "1":
+            print("         Opc 1:  Registrar nuevos libros ")
             nuevoLibro()
 
-        elif opc == "2":            # Opc 2 = Registrar nuevas Revistas
+        elif opc == "2":
+            print("         Opc 2:  Registrar nuevas Revistas ")
             nuevoRevista()
 
-        elif opc == "3":            # Mostrar Publicaciones registradas
+        elif opc == "3":
+            print("         Opc 3:  Mostrar Publicaciones registradas")
             mostrarPublic()
 
-        elif opc == "4":            # opc 4: Registrar Nuevo servicio
-            print("            Solicitar algún Servicio             ")
-            print()
-            s.getServicio()
-            print()
-
-        elif opc == "5":            # opc 5: Mostrar servicios registrados
-            print("            Mostrar servicios registrados           ")
-            print()
-            print(s.mostrarServicio())
+        elif opc == "4":
+            print("         Opc 4: Registrar Nuevo servicio    ")
+            NuevoServicio()
             print()
 
-        elif opc == "6":            # OPC 6: CALCULAR DEUDAS por Servicios
+        elif opc == "5":
+            print("         Opc 5: Mostrar servicios registrados   ")
+            MostrarServicio()
+            print()
+
+        elif opc == "6":
+            print("         Opc 6: Mostrar Información del Fichero  ")
+            print()
+            MostrarArchivo()
+            print()
+
+        elif opc == "7":            # OPC 7: CALCULAR DEUDAS por Servicios
             print("            C A L C U L A D O R A            ")
 
             # Calculadora de multas por morocidad
             valor1 = 0
             valor2 = 0
             # operaciones a realizar
-            control = " "
-            while (control != ("s" or "S")):
+            ctrl = " "
+            while (ctrl != ("s" or "S")):
                 print("         CALCULADORA DEL SISTEMA ")
                 print()
                 valor1 = float(input("==> Digite el PRIMER valor ==> "))
@@ -154,11 +212,11 @@ if __name__ == "__main__":
                 else:
                     print("===> Error en el operador indicado ")
                 print()
-                control = input("===> Digite 'S' o 's' para finalizar o ENTER para continuar: ")
+                ctrl = input("===> Digite 'S' o 's' para finalizar o ENTER para continuar: ")
                 limpiar_pant()
                 print()
 
-        elif opc == "7":            # Registrar ingresos por prestación de servicios
+        elif opc == "8":            # Registrar ingresos por prestación de servicios
             result = 0
             matr1 = [0,1,2,3]
             for i in range(4):

@@ -15,19 +15,20 @@ class Publicacion:          # definición clase Publicación
         self.anno = input("Año: ")
         self.editorial = input("Editorial: ")
 
-class Libro (Publicacion):
+class Libro (Publicacion):      # Clase libro que hereda todos los atributos de Clase Publicación
     pass
 
-class Revista (Publicacion):
+class Revista (Publicacion):    # CLase Revista que hereda todos los atributos de Clase Publicacióh y
+                                # agrega atributo de volumen
     def __int__(self):
         super().__int__()
         self.volumen = " "
-        self.edicion = " "
+        self.numero = " "
 
     def setDatos(self):
         super().setDatos()
         self.volumen = input("Volumen: ")
-        self.edicion = input("Edición: ")
+        self.numero = input("Número: ")
 
 ###########################################################3
 # definición clase Usuarios
@@ -38,11 +39,10 @@ class Usuario():                #  clase Usuarios
         self.nombre = " "
         self.telefono = " "
 
-
     def mostrarUsuario(self):       # retorna los datos del usuario
         return "Num. Identif: {} Nombre: {}, tel. {}".format(self.identif, self.nombre,self.telefono)
 
-    def nuevoUsuario(s):            # lee datos de un NUEVO usuario
+    def SetUsuario(s):            # lee datos de un NUEVO usuario
         s.cedula = input("Num. Identificación: ")
         s.nombre = input("Nombre de Usuario: ")
         s.telefono = input("Telefono de Usuario: ")
@@ -67,14 +67,14 @@ class Servicio():    # definición clase Servicio
                " ".format(self.idServicio, self.descripc, self.fechInic, self.fechfinal,
                           self.idUsu, self.nombreUsu, self.telefUsu)
 
-    def getServicio(s):        # registrar nuevo servicio
+    def SetServicio(s):        # registrar nuevo servicio
         s.idServicio = input("Identif de Servicio ")
         s.descripc = input("Tipo de servicio (préstamo, devolución, pérdida, otro): ")
         s.fechInic = input("Fecha Inicio: ")
         s.fechfinal = input("Fecha devolución: ")
         s.idUsu = input("Identif. del Usuario: ")
         s.nombreUsu = input("Nombre del Usuario: ")
-        s.telefUsu = input("Telefono del Usuario")
+        s.telefUsu = input("Telefono del Usuario: ")
         return s
 
 

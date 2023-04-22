@@ -1,5 +1,7 @@
-
-class Singleton:
+# Funcion que define una clase para el uso del método singleton
+# crea un archivo histórico y no permite la creacion de más archivos de la misma clase
+class Singleton:            # clase singleton que solo permite el uso de un arhivo histórico
+                            # para registrar los servicios prestados
     _instance = None
 
     def __init__(self):     # Llamado al metodo Init
@@ -37,24 +39,4 @@ class UnicoArchivo:
     def agregarLinea(self, linea):
         self.file.write(linea + '\n')
 
-
-# en el  principal:    from misClases inport Singleton
-
-instancia1 = Singleton()
-
-archivo = UnicoArchivo("Historial.txt")
-archivo.agregarLinea("Hola mundo 1")
-
-print("Utilizando el archivo: ", instancia1.getNombre())
-
-instancia2 = Singleton()    #Podemos intentar crear otra instancia
-
-
-print("Estamos utilizando el archivo; ", instancia2.getNombre())
-instancia1.getNombre()
-
-
-archivo2 = UnicoArchivo("Historico.txt")
-archivo2.agregarLinea("No puede hacer otro archivo, ojo")
-archivo2.agregarLinea("Linnea 3 ===> No puede hacer otro archivo")
 
