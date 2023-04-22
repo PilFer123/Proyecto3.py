@@ -67,9 +67,10 @@ def nuevoRevista():         # Registra nuevas revistas
     print()
 
 def NuevoServicio():
-    instancia1 = Singleton()
+    ''''    instancia1 = Singleton()
     archivo = UnicoArchivo("Historial.txt")
     print("Se está utilizando el archivo: ", instancia1.getNombre())
+    '''
     ctrl = True
     while ctrl == True:
         print()
@@ -80,7 +81,8 @@ def NuevoServicio():
         linea = k.idServicio+" "+k.descripc+" "+k.fechInic+" "+k.fechfinal+" "+\
             k.idUsu+" "+k.nombreUsu+" "+k.telefUsu
         try:
-            archivo.agregarLinea(linea)     # Agrega una línea de datos al archivo
+            MiArch.agregarLinea(linea)     # Agrega una línea de datos al archivo
+
         except:
             print("Error: No agregó información al archivo")
 
@@ -96,6 +98,7 @@ def NuevoServicio():
         print()
         if (input("\n Necesita registrar más servicios: ") in ["S","s"]): ctrl = True
         else: ctrl = False
+
     print()
 
 def MostrarServicio():
@@ -107,11 +110,13 @@ def MostrarServicio():
         print()
 
 def MostrarArchivo():
+    # Muestra el contenido del fichero
     ctrl = 0
     print(" Se mostrarán los registros ")
     with open('Historial.txt', 'r') as fichero:
         for linea in fichero.readlines():
             print(linea, end='')
+    fichero.close()
 
 def IngPorServ():
     tot = 0
@@ -125,6 +130,14 @@ def IngPorServ():
 # MAIN
 if __name__ == "__main__":
     k = Servicio()
+    instancia1 = Singleton()
+    print(instancia1.getNombre())
+
+    MiArch = UnicoArchivo("Historico.txt")
+    print("Se está utilizando el archivo: ", instancia1.getNombre())
+
+
+    j = input("presione una tecla para continuar")
 
     arrLib = []
     arrRev = []

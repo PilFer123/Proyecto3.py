@@ -15,6 +15,9 @@ class Singleton:            # clase singleton que solo permite el uso de un arhi
     def getNombre(self):        # Muestra el atributo nombre indicado x usuario
         print(self.nombre)
 
+    def setValor(self, valor):
+        self.nombre = valor
+
 class UnicoArchivo:
     _instance = None
     file = None
@@ -35,4 +38,13 @@ class UnicoArchivo:
     def agregarLinea(self, linea):
         self.file.write(linea + '\n')
 
+
+inst = Singleton()
+inst.getNombre()
+inst.setValor(("primera instancia"))
+inst.getNombre()
+
+archivo = UnicoArchivo("Historial.txt")
+archivo.agregarLinea("Hola, esta es mi primera linea")
+archivo.agregarLinea("Segunda línea")
 
