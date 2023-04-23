@@ -22,10 +22,10 @@ class UnicoArchivo:
     _instance = None
     file = None
 
-    def __init__(self, NombreArchivo):
+    def __init__(self, nombreArchivo):
         self.matrix = [[1,2],[3,4],[5,6]]
         if self.file is None:
-            self.file = open(NombreArchivo, 'w')
+            self.file = open(nombreArchivo, 'w')
 
     def __new__(cls, *args, **kwargs):
 
@@ -35,16 +35,29 @@ class UnicoArchivo:
 
         return cls._instance
 
-    def agregarLinea(self, linea):
+    def agregarLinea(self, linea):  # Escribe en el archivo
         self.file.write(linea + '\n')
 
+
+def MostrarArchivo(archivo):
+    # Muestra el contenido del fichero
+    archivo = open('Historial.txt', 'r')
+    lineas = archivo.readlines()
+    for linea in lineas:
+        print(linea)
+
+
+'''
 
 inst = Singleton()
 inst.getNombre()
 inst.setValor(("primera instancia"))
-inst.getNombre()
 
 archivo = UnicoArchivo("Historial.txt")
 archivo.agregarLinea("Hola, esta es mi primera linea")
 archivo.agregarLinea("Segunda línea")
+archivo.agregarLinea("Hola, esta es la linea tercera")
 
+inst.getNombre()
+
+MostrarArchivo(archivo)'''

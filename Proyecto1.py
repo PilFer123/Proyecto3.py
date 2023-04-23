@@ -7,8 +7,8 @@ def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 from mis_clases import Publicacion, Libro, Revista, Servicio, Calc
-from ClaseSingHistorico import Singleton, UnicoArchivo
 from Calculadora import Calc
+from ClaseSingHistorico import Singleton, UnicoArchivo, MostrarArchivo
 def limpiar_pant():
     for a in range(30):
         print(" ")
@@ -66,11 +66,8 @@ def nuevoRevista():         # Registra nuevas revistas
         arrRev.append(y)
     print()
 
-def NuevoServicio():
-    ''''    instancia1 = Singleton()
-    archivo = UnicoArchivo("Historial.txt")
-    print("Se está utilizando el archivo: ", instancia1.getNombre())
-    '''
+def NuevoServicio(archivo):
+
     ctrl = True
     while ctrl == True:
         print()
@@ -81,8 +78,7 @@ def NuevoServicio():
         linea = k.idServicio+" "+k.descripc+" "+k.fechInic+" "+k.fechfinal+" "+\
             k.idUsu+" "+k.nombreUsu+" "+k.telefUsu
         try:
-            MiArch.agregarLinea(linea)     # Agrega una línea de datos al archivo
-
+            archivo.agregarLinea(linea)     # Agrega una línea de datos al archivo
         except:
             print("Error: No agregó información al archivo")
 
@@ -109,14 +105,6 @@ def MostrarServicio():
         print(f"Id. Usuario: {k.idUsu} Nombre Usuario: {k.nombreUsu} Telef. Usuario: {k.telefUsu} ")
         print()
 
-def MostrarArchivo():
-    # Muestra el contenido del fichero
-    ctrl = 0
-    print(" Se mostrarán los registros ")
-    with open('Historial.txt', 'r') as fichero:
-        for linea in fichero.readlines():
-            print(linea, end='')
-    fichero.close()
 
 def IngPorServ():
     tot = 0
@@ -130,18 +118,33 @@ def IngPorServ():
 # MAIN
 if __name__ == "__main__":
     k = Servicio()
+    '''
     instancia1 = Singleton()
     print(instancia1.getNombre())
 
     MiArch = UnicoArchivo("Historico.txt")
     print("Se está utilizando el archivo: ", instancia1.getNombre())
+    '''
+    #from ClaseSingHistorico import Singleton, UnicoArchivo, MostrarArchivo
 
+    inst = Singleton()
+    inst.getNombre()
+    inst.setValor(("primera instancia"))
+    inst.getNombre()
+
+    archivo = UnicoArchivo("Historial.txt")
+    archivo.agregarLinea("Hola, esta es mi primera linea")
+    archivo.agregarLinea("Segunda línea")
+    archivo.agregarLinea("Hola, esta es mi tercera linea")
+
+    inst.getNombre()
+
+    MostrarArchivo(archivo)
 
     j = input("presione una tecla para continuar")
 
     arrLib = []
     arrRev = []
-    #arrIng = []
     arrServ = []
     dicCostos = {}
     opcTupla = ("1","2","3","4","5","6","7","8","0")
@@ -195,7 +198,7 @@ if __name__ == "__main__":
 
         elif opc == "4":
             print("         Opc 4: Registrar Nuevo servicio    ")
-            NuevoServicio()
+            NuevoServicio(archivo)
             print()
 
 
@@ -207,7 +210,8 @@ if __name__ == "__main__":
         elif opc == "6":
             print("         Opc 6: Mostrar Información del Fichero  ")
             print()
-            MostrarArchivo()
+            MostrarArchivo(archivo)
+            # MostrarArchivo()
             print()
 
         elif opc == "7":            # OPC 7: CALCULAR DEUDAS por Servicios
