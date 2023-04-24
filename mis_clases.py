@@ -60,13 +60,3 @@ class Servicio():    # definición clase Servicio
         s.telefUsu = input("Telefono del Usuario: ")
         return s
 
-
-###########################################################
-# definición Clase Calculadora de precios
-class Calc:
-    def __init__(self, n1, n2):
-        self.sumar = n1 + n2
-        self.restar = n1 - n2
-        self.multr = n1 * n2
-        self.dividr = n1 / n2
-        return
