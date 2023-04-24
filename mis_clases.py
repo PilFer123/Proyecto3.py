@@ -1,6 +1,5 @@
-# Definición de clases
+# Definición de clases para el Proyecto 2
 ###########################################################
-
 
 class Publicacion:          # definición clase Publicación
     def __int__(self):

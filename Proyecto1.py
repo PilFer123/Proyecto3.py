@@ -1,4 +1,4 @@
-# Proyecto 1: Curso de Programación
+# Proyecto 2: Curso de Programación III
 # Elaborado por M. Pilar Fernández Rodríguez
 # I Cuatrimestre 2023
 
@@ -7,7 +7,6 @@ def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 from mis_clases import Libro, Revista, Servicio
-#from Sumadora import *
 from ClaseSingHistorico import Singleton, UnicoArchivo
 def LimpiarPant():
     for a in range(30):
