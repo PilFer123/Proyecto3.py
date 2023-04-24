@@ -51,12 +51,12 @@ class Servicio():    # definición clase Servicio
                           self.idUsu, self.nombreUsu, self.telefUsu)
 
     def SetServicio(s):        # registrar nuevo servicio
-        s.idServicio = input("Identif de Servicio ")
+        s.idServicio = input("Identif de Servicio:  ")
         s.descripc = input("Tipo de servicio (préstamo, devolución, pérdida, otro): ")
-        s.fechInic = input("Fecha Inicio: ")
-        s.fechfinal = input("Fecha devolución: ")
+        s.fechInic = input("Fecha Inicio:         ")
+        s.fechfinal = input("Fecha devolución:     ")
         s.idUsu = input("Identif. del Usuario: ")
-        s.nombreUsu = input("Nombre del Usuario: ")
+        s.nombreUsu = input("Nombre del Usuario:   ")
         s.telefUsu = input("Telefono del Usuario: ")
         return s
 

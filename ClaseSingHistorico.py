@@ -5,7 +5,7 @@ class Singleton:            # clase singleton que solo permite el uso de un arhi
     _instance = None
 
     def __init__(self):     # Llamado al metodo Init
-        self.nombre = "Historial"
+        self.nombre = "Historial.txt"
 
     def __new__(cls, *args, **kwargs):
         if not isinstance(cls._instance, cls):
@@ -38,26 +38,3 @@ class UnicoArchivo:
     def agregarLinea(self, linea):  # Escribe en el archivo
         self.file.write(linea + '\n')
 
-
-def MostrarArchivo(archivo):
-    # Muestra el contenido del fichero
-    archivo = open('Historial.txt', 'r')
-    lineas = archivo.readlines()
-    for linea in lineas:
-        print(linea)
-
-
-'''
-
-inst = Singleton()
-inst.getNombre()
-inst.setValor(("primera instancia"))
-
-archivo = UnicoArchivo("Historial.txt")
-archivo.agregarLinea("Hola, esta es mi primera linea")
-archivo.agregarLinea("Segunda línea")
-archivo.agregarLinea("Hola, esta es la linea tercera")
-
-inst.getNombre()
-
-MostrarArchivo(archivo)'''

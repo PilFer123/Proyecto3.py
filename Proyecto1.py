@@ -6,14 +6,14 @@ import os
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-from mis_clases import Publicacion, Libro, Revista, Servicio, Calc
+from mis_clases import Libro, Revista, Servicio
 from Calculadora import Calc
-from ClaseSingHistorico import Singleton, UnicoArchivo, MostrarArchivo
-def limpiar_pant():
+from ClaseSingHistorico import Singleton, UnicoArchivo
+def LimpiarPant():
     for a in range(30):
         print(" ")
 
-def mostrarPublic():        # Muestra las Publicaciones almacenadas
+def MostrarPublic():        # Muestra las Publicaciones almacenadas
     print("            Mostrar Publicaciones        ")
     print("Libros Registrados ")
     for j in range(len(arrLib)):
@@ -27,7 +27,7 @@ def mostrarPublic():        # Muestra las Publicaciones almacenadas
               f"Vol.: {arrRev[i].volumen} Número: {arrRev[i].numero}")
     print()
 
-def nuevoLibro():       # Registra nuevos libros
+def NuevoLibro():       # Registra nuevos libros
     print("            Registrar NUEVOS Libros               ")
     z = 0
     while z >= 0:
@@ -46,7 +46,7 @@ def nuevoLibro():       # Registra nuevos libros
         arrLib.append(x)
         print()
 
-def nuevoRevista():         # Registra nuevas revistas
+def NuevoRevista():         # Registra nuevas revistas
     print("            Registrar NUEVAS Revistas             ")
     ctrl = 0
     while ctrl >= 0:
@@ -66,24 +66,33 @@ def nuevoRevista():         # Registra nuevas revistas
         arrRev.append(y)
     print()
 
-def NuevoServicio(archivo):
-
+def NuevoServicio():    # Registra nuevos servicios
+    i = 0                   # Almacena la información en el fichero
     ctrl = True
+    #fichero = open("Historial.txt", 'a')
     while ctrl == True:
         print()
         print("Ingresando datos de Nuevo Servicio ")
         print()
+        i = i + 1
+        k = str("obj") + str(i)
+        k = Servicio()
         k.SetServicio()
         arrServ.append(k)
-        linea = k.idServicio+" "+k.descripc+" "+k.fechInic+" "+k.fechfinal+" "+\
+
+        lista = k.idServicio+" "+k.descripc+" "+k.fechInic+" "+k.fechfinal+" "+\
             k.idUsu+" "+k.nombreUsu+" "+k.telefUsu
-        try:
-            archivo.agregarLinea(linea)     # Agrega una línea de datos al archivo
-        except:
-            print("Error: No agregó información al archivo")
+        # Abrimos el fichero
+        fichero = open("Historial.txt", 'a')
+
+        # Guardamos la lista en el fichero
+        fichero.writelines(lista + "\n")
+
+        # Cerramos el fichero
+        fichero.close()
 
         # almacenar costos de servicios
-        print("Registro de costos por el servicio prestado")
+        print("\n Registro de costos por el servicio prestado")
         while True:
             try:
                 dicCostos[k.idServicio]= float(input("==> Digite el costo del servicio?: "))
@@ -92,19 +101,21 @@ def NuevoServicio(archivo):
                 print("  ==> Error en el valor digitado \n")
                 continue
         print()
-        if (input("\n Necesita registrar más servicios: ") in ["S","s"]): ctrl = True
+        if (input("\n Necesita registrar más servicios (S/N): ") in ["S","s"]): ctrl = True
         else: ctrl = False
-
     print()
-
 def MostrarServicio():
+    print(arrServ)   # ver el contenido del arreglo
     for j in range(len(arrServ)):
         k = arrServ[j]
-        print(f"Id. Servicio: {k.idServicio} Descripción {k.descripc} ")
-        print(f"Fecha Inic: {k.fechInic} Fecha Fin. {k.fechfinal} ")
-        print(f"Id. Usuario: {k.idUsu} Nombre Usuario: {k.nombreUsu} Telef. Usuario: {k.telefUsu} ")
+        print("Id. Servicio:    ", k.idServicio)
+        print("Descripción:     ", k.descripc)
+        print("Fecha Inic:      ", k.fechInic)
+        print("Fecha Fin.       ", k.fechfinal)
+        print("Id. Usuario:     ", k.idUsu)
+        print("Nombre Usuario:  ", k.nombreUsu)
+        print("Telef. Usuario:  ", k.telefUsu)
         print()
-
 
 def IngPorServ():
     tot = 0
@@ -114,34 +125,21 @@ def IngPorServ():
         tot = tot + dicCostos[x]
     print(f"El total de ingresos es: {tot}")
 
+def MostrarArchivo():       # presenta los datos del fichero
+    print("Id.Servicio Desc. F.Inic. F.Fin IdUsu. NomUsu TelUsu")
+    with open('Historial.txt', 'r') as archivo:
+        linea = archivo.readline()
+        while linea != '':
+            print(linea, end='')
+            linea = archivo.readline()
+    archivo.close()
+
 
 # MAIN
 if __name__ == "__main__":
-    k = Servicio()
-    '''
-    instancia1 = Singleton()
-    print(instancia1.getNombre())
-
-    MiArch = UnicoArchivo("Historico.txt")
-    print("Se está utilizando el archivo: ", instancia1.getNombre())
-    '''
-    #from ClaseSingHistorico import Singleton, UnicoArchivo, MostrarArchivo
-
+    #k = Servicio()
     inst = Singleton()
-    inst.getNombre()
-    inst.setValor(("primera instancia"))
-    inst.getNombre()
-
     archivo = UnicoArchivo("Historial.txt")
-    archivo.agregarLinea("Hola, esta es mi primera linea")
-    archivo.agregarLinea("Segunda línea")
-    archivo.agregarLinea("Hola, esta es mi tercera linea")
-
-    inst.getNombre()
-
-    MostrarArchivo(archivo)
-
-    j = input("presione una tecla para continuar")
 
     arrLib = []
     arrRev = []
@@ -150,11 +148,9 @@ if __name__ == "__main__":
     opcTupla = ("1","2","3","4","5","6","7","8","0")
 
     opc = 1
-    while opc != 0:
-        limpiar_pant()
+    while opc != 0:             # mostrar MENU PRINCIPAL
+        LimpiarPant()
         clear()
-        # mostrar MENU PRINCIPAL
-
         print("+++++++++++++++++++++++++++++++++++++++++++")
         print("¨¨¨UNIVERSIDAD ESTATAL A DISTANCIA¨¨¨¨¨¨¨¨¨")
         print("¨¨¨Carrera de Informática Educativa¨¨¨¨¨¨¨¨")
@@ -178,29 +174,27 @@ if __name__ == "__main__":
         print("    OPC 0: Finalizar                       ")
         print("+++++++++++++++++++++++++++++++++++++++++++")
         opc = input("Digite una opción: 1,2,3,4,5,6,7,8 o 0 para finalizar: ")
-
-        limpiar_pant()
+        LimpiarPant()
         clear()
         if not(opc in opcTupla):    # error: no digitó un número
             control = input("Error al digitar la opción, Presione ENTER para continuar ==>")
             continue
         elif opc == "1":
             print("         Opc 1:  Registrar nuevos libros ")
-            nuevoLibro()
+            NuevoLibro()
 
         elif opc == "2":
             print("         Opc 2:  Registrar nuevas Revistas ")
-            nuevoRevista()
+            NuevoRevista()
 
         elif opc == "3":
             print("         Opc 3:  Mostrar Publicaciones registradas")
-            mostrarPublic()
+            MostrarPublic()
 
         elif opc == "4":
             print("         Opc 4: Registrar Nuevo servicio    ")
-            NuevoServicio(archivo)
+            NuevoServicio()
             print()
-
 
         elif opc == "5":
             print("         Opc 5: Mostrar servicios registrados   ")
@@ -210,13 +204,11 @@ if __name__ == "__main__":
         elif opc == "6":
             print("         Opc 6: Mostrar Información del Fichero  ")
             print()
-            MostrarArchivo(archivo)
-            # MostrarArchivo()
+            MostrarArchivo()
             print()
 
         elif opc == "7":            # OPC 7: CALCULAR DEUDAS por Servicios
             print("            C A L C U L A D O R A            ")
-
             Calc()
 
         elif opc == "8":
@@ -229,3 +221,7 @@ if __name__ == "__main__":
             break
         control = input("\n Presione ENTER para continuar ==> ")
     print(" Fin del ciclo ")
+
+
+
+
