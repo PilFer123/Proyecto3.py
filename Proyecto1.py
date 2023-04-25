@@ -104,7 +104,7 @@ def NuevoServicio():    # Registra nuevos servicios
         else: ctrl = False
     print()
 def MostrarServicio():
-    print(arrServ)   # ver el contenido del arreglo
+    # ver el contenido del arreglo
     for j in range(len(arrServ)):
         k = arrServ[j]
         print("Id. Servicio:    ", k.idServicio)
@@ -119,8 +119,9 @@ def MostrarServicio():
 def IngPorServ():
     tot = 0
     # Imprime los valores del diccionario
+    print("Ingresos Registrados por los servicios prestados ")
     for x in dicCostos:
-        print(dicCostos[x])
+        print(" ", dicCostos[x])
         tot = tot + dicCostos[x]
     print(f"El total de ingresos es: {tot}")
 
